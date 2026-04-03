@@ -48,6 +48,7 @@ const jobSchema = new mongoose.Schema(
     },
     dateApplied: {
       type: Date,
+      default: Date.now,
     },
     interviewDate: {
       type: Date,

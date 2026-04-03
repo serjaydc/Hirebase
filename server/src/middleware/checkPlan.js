@@ -1,16 +1,18 @@
 export const checkPlan = async (req, res, next) => {
   try {
     const user = req.user;
+    const currentDate = new Date();
 
     if (
       user.plan === "premium" &&
       user.planExpiresAt &&
-      new Date(user.planExpiresAt) < new Date()
+      new Date(user.planExpiresAt) < currentDate
     ) {
-      user.plan = "starter";
-      user.planExpiresAt = null;
-
-      await user.save();
+      if (user.plan !== "starter") {
+        user.plan = "starter";
+        user.planExpiresAt = null;
+        await user.save();
+      }
     }
 
     next();

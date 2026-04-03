@@ -62,9 +62,7 @@ export const makePayment = async (req, res) => {
       cardLast4: last4,
     });
   } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -96,7 +94,7 @@ export const downgradeUserPlan = async (req, res) => {
       message: "Premium has been cancelled successfully",
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };
 
@@ -132,6 +130,6 @@ export const planInfo = async (req, res) => {
       })),
     });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    return res.status(500).json({ message: error.message });
   }
 };

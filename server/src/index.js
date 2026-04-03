@@ -7,6 +7,7 @@ import connectDB from "./config/db.js";
 import AuthRoutes from "./routes/auth.route.js";
 import UserRoutes from "./routes/user.route.js";
 import PaymentRoutes from "./routes/payment.route.js";
+import JobRoutes from "./routes/job.route.js";
 
 dotenv.config();
 
@@ -24,6 +25,7 @@ app.use(cookieParser());
 app.use("/auth", AuthRoutes);
 app.use("/user", UserRoutes);
 app.use("/account", PaymentRoutes);
+app.use("/job", JobRoutes);
 
 connectDB().then(() => {
   app.listen(process.env.PORT, () => {
