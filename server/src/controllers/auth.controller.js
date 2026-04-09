@@ -88,3 +88,13 @@ export const authSignout = async (req, res) => {
 
   res.json({ message: "Logged out" });
 };
+
+export const authUser = async (req, res) => {
+  try {
+    return res.status(200).json({
+      user: req.user,
+    });
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};

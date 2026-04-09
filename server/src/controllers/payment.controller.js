@@ -1,7 +1,7 @@
 import Payment from "../models/payment.model.js";
 import { upgradeUserPlan } from "../utils/upgradeUserPlan.js";
 
-export const makePayment = async (req, res) => {
+export const monthlyPayment = async (req, res) => {
   try {
     const { cardNumber, cardExpMonth, cardExpYear, firstName, lastName } =
       req.body;
@@ -49,7 +49,7 @@ export const makePayment = async (req, res) => {
       status: "active",
       cardLast4: last4,
       cardBrand,
-      amount: 39.98,
+      amount: 19.98,
       currency: "GBP",
     });
 
@@ -66,7 +66,7 @@ export const makePayment = async (req, res) => {
   }
 };
 
-export const downgradeUserPlan = async (req, res) => {
+export const cancelMonthlyPayment = async (req, res) => {
   try {
     const user = req.user;
     const currentDate = new Date();

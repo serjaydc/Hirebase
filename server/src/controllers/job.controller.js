@@ -8,9 +8,9 @@ export const addJob = async (req, res) => {
       user: user._id,
     });
 
-    if (user.plan === "starter" && jobsCount >= 30) {
+    if (user.plan === "starter" && jobsCount >= 50) {
       return res.status(403).json({
-        message: "Starter plan limit reached (30 jobs). Upgrade to premium",
+        message: "Starter plan limit reached (50 jobs). Upgrade to premium",
       });
     }
 
@@ -91,11 +91,6 @@ export const getAllJobs = async (req, res) => {
 
     const jobs = await Job.find({ user: user._id }).sort({ createdAt: -1 });
 
-    if (jobs.length === 0) {
-      return res.status(404).json({
-        message: "No jobs history",
-      });
-    }
     return res.status(200).json({ jobs, jobsCount: jobs.length });
   } catch (error) {
     return res.status(500).json({ message: error.message });

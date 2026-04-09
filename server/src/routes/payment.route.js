@@ -1,15 +1,15 @@
 import express from "express";
 import { protect } from "../middleware/verifyToken.js";
 import {
-  downgradeUserPlan,
-  makePayment,
+  cancelMonthlyPayment,
+  monthlyPayment,
   planInfo,
 } from "../controllers/payment.controller.js";
 
 const router = express.Router();
 
-router.post("/upgrade", protect, makePayment);
-router.post("/downgrade", protect, downgradeUserPlan);
+router.post("/upgrade", protect, monthlyPayment);
+router.post("/downgrade", protect, cancelMonthlyPayment);
 router.get("/plan", protect, planInfo);
 
 export default router;
