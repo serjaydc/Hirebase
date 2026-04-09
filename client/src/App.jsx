@@ -11,6 +11,9 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import UpgradePlan from "./pages/UpgradePlan";
+import AllJobs from "./pages/AllJobs";
+import AddJob from "./pages/AddJob";
+import Profile from "./pages/Profile";
 
 const App = () => {
   const { checkAuth } = useAuthStore();
@@ -26,11 +29,14 @@ const App = () => {
             <Route path="/" element={<Home />} />
             <Route path="/signin" element={<Login />} />
             <Route path="/signup" element={<Register />} />
-            <Route path="/upgrade" element={<UpgradePlan />} />
+            <Route path="/plan" element={<UpgradePlan />} />
           </Route>
 
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/dashboard/jobs" element={<AllJobs />} />
+            <Route path="/dashboard/add" element={<AddJob />} />
+            <Route path="/profile" element={<Profile />} />
           </Route>
         </Route>
       </Routes>

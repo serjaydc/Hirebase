@@ -50,7 +50,7 @@ const FEATURES_DATA = [
 
 const Features = () => {
   return (
-    <section className=" container mx-auto px-2 py-4 mb-10">
+    <section id="features" className=" container mx-auto px-2 py-4 mb-10">
       <div className="text-center mb-8">
         <h2 className="font-semibold text-3xl lg:text-4xl mb-2 leading-tight">
           Everything You Need to Succeed

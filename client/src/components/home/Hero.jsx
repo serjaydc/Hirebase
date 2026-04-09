@@ -26,12 +26,12 @@ const Hero = () => {
             Start Tracking Free <MoveRight strokeWidth={1.5} />
           </Link>
 
-          <Link
-            to="/"
+          <a
+            href="#features"
             className="py-4 px-8 rounded-lg border border-neutral-300 hover:bg-neutral-200 transition-all flex items-center gap-2 hover:gap-3"
           >
             Features & Pricing <Gem strokeWidth={1.5} />
-          </Link>
+          </a>
         </div>
       </div>
       <HeroTable />

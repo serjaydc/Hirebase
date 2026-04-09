@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="flex flex-col sm:flex-row items-center gap-4 justify-between">
           <div>
             <Link to="/" className="flex items-center gap-2">
-              <div className="bg-indigo-500 p-2 rounded-md">
+              <div className="bg-indigo-500 p-1 rounded-md">
                 <Briefcase className="size-6 text-white" />
               </div>
               <span className="text-lg">Hirebase</span>

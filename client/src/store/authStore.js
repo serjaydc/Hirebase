@@ -9,6 +9,7 @@ export const useAuthStore = create((set) => ({
 
   checkAuth: async () => {
     try {
+      set({ isCheckingAuth: true, error: null });
       const res = await api.get("/auth/user");
 
       set({
@@ -20,7 +21,6 @@ export const useAuthStore = create((set) => ({
       set({
         user: null,
         isCheckingAuth: false,
-        error: error.response?.data?.message,
       });
     }
   },
@@ -34,11 +34,13 @@ export const useAuthStore = create((set) => ({
       set({
         user: res.data.user,
         loading: false,
+        error: null,
       });
     } catch (error) {
       set({
         error: error.response?.data?.message,
         loading: false,
+        error: null,
       });
     }
   },
@@ -52,6 +54,7 @@ export const useAuthStore = create((set) => ({
       set({
         user: res.data.user,
         loading: false,
+        error: null,
       });
     } catch (error) {
       set({

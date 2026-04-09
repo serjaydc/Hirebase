@@ -4,7 +4,7 @@ import PlansCard from "./PlansCard";
 const PLANS_DATA = [
   {
     name: "Starter",
-    price: "Free of Use",
+    price: "Free",
     description: "Perfect to get started and stay organized",
     features: [
       "Track up to 50 applications",
