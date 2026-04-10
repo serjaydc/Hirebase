@@ -4,9 +4,13 @@ import { api } from "../api/axios.js";
 export const useJobStore = create((set, get) => ({
   jobs: [],
   selectedJob: {},
-  jobsCount: null,
   loading: false,
   error: null,
+  search: "",
+  status: "",
+
+  setSearch: (search) => set({ search }),
+  setStatus: (status) => set({ status }),
 
   // Get All Jobs
   getJobs: async () => {
@@ -17,14 +21,12 @@ export const useJobStore = create((set, get) => ({
 
       set({
         jobs: res.data.jobs,
-        jobsCount: res.data.jobsCount,
         loading: false,
         error: null,
       });
     } catch (error) {
       set({
         jobs: [],
-        jobsCount: 0,
         error: error.response?.data?.message,
         loading: false,
       });

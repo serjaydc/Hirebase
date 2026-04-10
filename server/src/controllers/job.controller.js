@@ -26,7 +26,6 @@ export const addJob = async (req, res) => {
       dateApplied,
       interviewDate,
       followUpDate,
-      jobTags,
       jobDescription,
       contactName,
       contactEmail,
@@ -47,8 +46,8 @@ export const addJob = async (req, res) => {
       jobPriority,
       jobSource,
 
-      jobLocation: jobLocation?.trim(),
-      jobSalaryRange: jobSalaryRange?.trim(),
+      jobLocation: jobLocation ? jobLocation?.trim() : undefined,
+      jobSalaryRange: jobSalaryRange ? jobSalaryRange?.trim() : undefined,
       applicationURL:
         applicationURL && applicationURL.startsWith("https://")
           ? applicationURL.trim()
@@ -58,16 +57,13 @@ export const addJob = async (req, res) => {
       interviewDate: interviewDate ? new Date(interviewDate) : undefined,
       followUpDate: followUpDate ? new Date(followUpDate) : undefined,
 
-      jobTags:
-        typeof jobTags === "string"
-          ? jobTags.split(" ").map((tag) => tag.trim())
-          : jobTags,
+      jobDescription: jobDescription
+        ? jobDescription?.trim()
+        : "No Description",
 
-      jobDescription: jobDescription?.trim(),
-
-      contactName: contactName?.trim(),
-      contactEmail: contactEmail?.trim(),
-      contactPhone: contactPhone?.trim(),
+      contactName: contactName ? contactName?.trim() : undefined,
+      contactEmail: contactEmail ? contactEmail?.trim() : undefined,
+      contactPhone: contactPhone ? contactPhone?.trim() : undefined,
     };
 
     if (newJob.interviewDate) {
@@ -91,7 +87,7 @@ export const getAllJobs = async (req, res) => {
 
     const jobs = await Job.find({ user: user._id }).sort({ createdAt: -1 });
 
-    return res.status(200).json({ jobs, jobsCount: jobs.length });
+    return res.status(200).json({ jobs });
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }

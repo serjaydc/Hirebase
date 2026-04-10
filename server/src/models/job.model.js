@@ -56,9 +56,6 @@ const jobSchema = new mongoose.Schema(
     followUpDate: {
       type: Date,
     },
-    jobTags: {
-      type: [String],
-    },
     jobDescription: {
       type: String,
     },

@@ -14,6 +14,7 @@ import UpgradePlan from "./pages/UpgradePlan";
 import AllJobs from "./pages/AllJobs";
 import AddJob from "./pages/AddJob";
 import Profile from "./pages/Profile";
+import SingleJob from "./pages/SingleJob";
 
 const App = () => {
   const { checkAuth } = useAuthStore();
@@ -35,6 +36,7 @@ const App = () => {
           <Route element={<PrivateRoute />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/dashboard/jobs" element={<AllJobs />} />
+            <Route path="/dashboard/jobs/:id" element={<SingleJob />} />
             <Route path="/dashboard/add" element={<AddJob />} />
             <Route path="/profile" element={<Profile />} />
           </Route>

@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 
 import { useAuthStore } from "../store/authStore";
 
-import Header from "../components/ui/Header";
-import Sidebar from "../components/ui/Sidebar";
-import Footer from "../components/ui/Footer";
+import Header from "../components/common/Header";
+import Sidebar from "../components/common/Sidebar";
+import Footer from "../components/common/Footer";
 
 const Layout = () => {
   const { user, isCheckingAuth } = useAuthStore();
