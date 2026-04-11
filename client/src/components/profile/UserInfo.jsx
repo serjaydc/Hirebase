@@ -38,24 +38,6 @@ const UserInfo = () => {
             Edit Profile
           </button>
         </div>
-        <div className="mb-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h3 className=" text-lg font-medium capitalize">
-                Account Type: {plan}
-              </h3>
-
-              <p className="text-neutral-500">
-                {planExpiresAt
-                  ? `Plan expires on ${planExpiresAt}`
-                  : "There is no current membership plan"}
-              </p>
-            </div>
-            <button className="py-2 px-4 rounded-lg border border-neutral-300 hover:bg-neutral-200  transition-colors cursor-pointer">
-              View Plan
-            </button>
-          </div>
-        </div>
         <div className="bg-neutral-200/60 p-4 rounded-lg">
           <p className="text-black/80">Member since {memberSince}</p>
         </div>

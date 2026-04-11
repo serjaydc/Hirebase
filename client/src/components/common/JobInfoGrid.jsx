@@ -1,14 +1,21 @@
-export default function InfoGrid({ fields, data }) {
+import { useFormContext } from "react-hook-form";
+
+export default function InfoGrid({ fields, data, isEditing }) {
+  const { register } = useFormContext();
+
   return (
     <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
       {fields.map((field, index) => {
         const Icon = field.icon;
 
-        const value = data?.[field.key]
-          ? field.format
-            ? field.format(data[field.key])
-            : data[field.key]
-          : "N/A";
+        const rawValue = data?.[field.key];
+
+        const value =
+          rawValue != null && rawValue !== ""
+            ? field.format
+              ? field.format(rawValue)
+              : rawValue
+            : "N/A";
 
         return (
           <div
@@ -22,7 +29,36 @@ export default function InfoGrid({ fields, data }) {
               <p>{field.label}</p>
             </div>
 
-            <p className="font-medium text-xl capitalize">{value}</p>
+            {isEditing ? (
+              field.options ? (
+                <select
+                  {...register(field.key)}
+                  className="border border-neutral-200 rounded px-2 py-1 w-full outline-none"
+                >
+                  {field.options.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              ) : (
+                <input
+                  {...register(field.key)}
+                  type={
+                    field.type === "date"
+                      ? "date"
+                      : field.type === "email"
+                        ? "email"
+                        : field.type === "phone"
+                          ? "tel"
+                          : "text"
+                  }
+                  className="border border-neutral-200 rounded px-2 py-1 w-full outline-none"
+                />
+              )
+            ) : (
+              <p>{value}</p>
+            )}
           </div>
         );
       })}

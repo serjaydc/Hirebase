@@ -1,14 +1,18 @@
-import { MoveLeft, Pencil, Trash2 } from "lucide-react";
-import React, { useEffect } from "react";
+import { MoveLeft } from "lucide-react";
+import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useJobStore } from "../store/jobStore";
 import SingleJobMeta from "../components/job/SingleJobMeta";
 import InfoGrid from "../components/common/JobInfoGrid";
 import { CONTACT_INFO_FIELDS, JOB_INFO_FIELDS } from "../utils/jobFields.js";
+import { FormProvider, useForm } from "react-hook-form";
 
 const SingleJob = () => {
+  const [isEditing, setIsEditing] = useState(false);
+  const { selectedJob, getSingleJob, deleteJob, updateJob } = useJobStore();
   const { id } = useParams();
-  const { selectedJob, getSingleJob, deleteJob } = useJobStore();
+  const methods = useForm();
+  const { handleSubmit, reset } = methods;
 
   const formatDate = (date) =>
     new Date(date).toLocaleString("en-GB", {
@@ -20,9 +24,20 @@ const SingleJob = () => {
       hour12: true,
     });
 
+  const onSubmit = async (data) => {
+    await updateJob(id, data);
+    setIsEditing(false);
+  };
+
   useEffect(() => {
     if (id) getSingleJob(id);
   }, [id]);
+
+  useEffect(() => {
+    if (selectedJob) {
+      reset(selectedJob);
+    }
+  }, [selectedJob]);
 
   return (
     <div className="container mx-auto">
@@ -34,11 +49,33 @@ const SingleJob = () => {
         <span>Back to Jobs</span>
       </Link>
 
-      <SingleJobMeta job={selectedJob} deleteJob={deleteJob} id={id} />
-      <InfoGrid fields={JOB_INFO_FIELDS} data={selectedJob} />
-      <InfoGrid fields={CONTACT_INFO_FIELDS} data={selectedJob} />
+      <FormProvider {...methods}>
+        <SingleJobMeta
+          id={id}
+          job={selectedJob}
+          deleteJob={deleteJob}
+          updateJob={updateJob}
+          isEditing={isEditing}
+          setIsEditing={setIsEditing}
+          reset={reset}
+          onSubmit={handleSubmit(onSubmit)}
+        />
+        <InfoGrid
+          fields={JOB_INFO_FIELDS}
+          data={selectedJob}
+          isEditing={isEditing}
+        />
+        <InfoGrid
+          fields={CONTACT_INFO_FIELDS}
+          data={selectedJob}
+          isEditing={isEditing}
+        />
+      </FormProvider>
       <p className="text-center text-neutral-500">
-        Created {formatDate(selectedJob.createdAt)}
+        {selectedJob.updatedAt &&
+        selectedJob.updatedAt !== selectedJob.createdAt
+          ? `Updated ${formatDate(selectedJob.updatedAt)}`
+          : `Created ${formatDate(selectedJob.createdAt)}`}
       </p>
     </div>
   );

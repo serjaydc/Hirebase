@@ -1,12 +1,13 @@
 import React from "react";
+import { getJobStats } from "../../utils/jobStats.js";
 
 const JobsCounter = ({ jobs }) => {
-  const jobsTotal = jobs.length;
-  const jobsApplied = jobs.filter((job) => job.jobStatus === "applied").length;
-  const jobsInterview = jobs.filter(
-    (job) => job.jobStatus === "interview",
-  ).length;
-  const jobsOffer = jobs.filter((job) => job.jobStatus === "offer").length;
+  const stats = getJobStats(jobs);
+
+  const jobsTotal = stats.total;
+  const jobsApplied = stats.applied;
+  const jobsInterview = stats.interview;
+  const jobsOffer = stats.offer;
 
   return (
     <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-4">

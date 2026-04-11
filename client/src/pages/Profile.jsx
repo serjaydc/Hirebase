@@ -1,6 +1,8 @@
 import React from "react";
 import UserInfo from "../components/profile/UserInfo";
-import ProfileStats from "../components/profile/ProfileStats";
+
+import ProfileJobStats from "../components/profile/ProfileJobStats";
+import PlanInfo from "../components/profile/PlanInfo";
 
 const Profile = () => {
   return (
@@ -9,7 +11,8 @@ const Profile = () => {
         Profile Settings
       </h1>
       <UserInfo />
-      <ProfileStats />
+      <ProfileJobStats />
+      <PlanInfo />
     </section>
   );
 };

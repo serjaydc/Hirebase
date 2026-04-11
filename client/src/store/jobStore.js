@@ -84,6 +84,10 @@ export const useJobStore = create((set, get) => ({
 
       set((state) => ({
         jobs: state.jobs.map((job) => (job._id === id ? res.data.job : job)),
+
+        selectedJob:
+          state.selectedJob?._id === id ? res.data.job : state.selectedJob,
+
         loading: false,
         error: null,
       }));

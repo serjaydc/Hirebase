@@ -157,7 +157,7 @@ export const updateJob = async (req, res) => {
       Object.entries(req.body).filter(([key]) => allowedFields.includes(key)),
     );
 
-    const job = await Job.findOneAndUpdate(
+    const job = await Job.findByIdAndUpdate(
       {
         _id: id,
         user: user._id,
@@ -176,6 +176,7 @@ export const updateJob = async (req, res) => {
       message: "Job updated successfully",
     });
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
